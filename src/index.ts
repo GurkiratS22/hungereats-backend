@@ -28,6 +28,13 @@ app.get("/health", async (req: Request, res: Response) => {
     res.send({ message: "health OK!"});
 });
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+
 app.use("/api/my/user", MyUserRoute);
 app.use("/api/my/restaurant", MyRestaurantRoute);
 app.use("/api/restaurant", RestaurantRoute);
